@@ -1,0 +1,12 @@
+{
+  "rules": {
+    "indent": [
+      "warning",
+      2
+    ],
+    "quotes": [
+      "warning",
+      "single"
+    ]
+  }
+}
