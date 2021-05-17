@@ -24,9 +24,9 @@ const ProductCard: React.FC<Props> = (props: Props) => {
   return (
     <css.ProductCard width={width} className='product-card'>
       <css.CardContent>
-        <p>{name}</p>
-        <p>{price} RON</p>
-        <p>Created at: {formatDisplayDate(new Date(created))}</p>
+        <css.Name>{name}</css.Name>
+        <css.Price>{price} RON</css.Price>
+        <css.CreationDate>Created at: {formatDisplayDate(new Date(created))}</css.CreationDate>
       </css.CardContent>
 
       <css.CardMenu>

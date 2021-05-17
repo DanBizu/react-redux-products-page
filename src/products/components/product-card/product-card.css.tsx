@@ -14,9 +14,23 @@ export const ProductCard = styled.div<CardProps>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: white;
 `;
 
 export const CardContent = styled.div``;
+
+export const Name = styled.h4`
+  margin-top: 0px;
+`;
+
+export const Price = styled.p`
+  font-weight: 500;
+`;
+
+export const CreationDate = styled.p`
+  font-size: 12px;
+  color: grey;
+`;
 
 export const AddCard = styled(ProductCard)`
   flex: 1;

@@ -20,16 +20,16 @@ const ProductsPage: React.FC<Props> = (props: Props) => {
 
       {
         !!products.length ?
-        <>
-        <css.ProductsGrid>
-          {
-            products.map((product, key) =>
-              <ProductCard key={key} product={product} width={css.CARD_WIDTH}/>
-            )
-          }
-          <AddCard width={css.CARD_WIDTH}/>
-        </css.ProductsGrid>
-        </>
+        <css.ProductsBackground>
+          <css.ProductsGrid>
+            {
+              products.map((product, key) =>
+                <ProductCard key={key} product={product} width={css.CARD_WIDTH}/>
+              )
+            }
+            <AddCard width={css.CARD_WIDTH}/>
+          </css.ProductsGrid>
+        </css.ProductsBackground>
         :
         <p>No products ...</p>
       }
