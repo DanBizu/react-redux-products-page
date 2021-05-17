@@ -24,10 +24,10 @@ const ProductsPage: React.FC<Props> = (props: Props) => {
         <css.ProductsGrid>
           {
             products.map((product, key) =>
-              <ProductCard key={key} product={product} />
+              <ProductCard key={key} product={product} width={css.CARD_WIDTH}/>
             )
           }
-          <AddCard />
+          <AddCard width={css.CARD_WIDTH}/>
         </css.ProductsGrid>
         </>
         :

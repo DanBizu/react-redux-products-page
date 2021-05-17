@@ -2,14 +2,15 @@ import React from 'react';
 import { Product } from '../../../store/interfaces';
 import * as css from './product-card.css';
 import { useHistory } from 'react-router-dom';
-import { setForEdit } from '../../../store/services';
+import { formatDisplayDate, setForEdit } from '../../../store/services';
 
 interface Props {
   product: Product;
+  width: number;
 }
 
 const ProductCard: React.FC<Props> = (props: Props) => {
-  const { product } = props;
+  const { product, width } = props;
   const { id, name, price, created } = product;
   const history = useHistory();
 
@@ -18,12 +19,14 @@ const ProductCard: React.FC<Props> = (props: Props) => {
     history.push(`/manage/${id}`);
   }
 
+  console.log('+++ new Date(created)', new Date(created));
+
   return (
-    <css.ProductCard className='product-card'>
+    <css.ProductCard width={width} className='product-card'>
       <css.CardContent>
         <p>{name}</p>
-        <p>{price}</p>
-        <p>{created.toString()}</p>
+        <p>{price} RON</p>
+        <p>Created at: {formatDisplayDate(new Date(created))}</p>
       </css.CardContent>
 
       <css.CardMenu>

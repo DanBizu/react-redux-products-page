@@ -5,7 +5,7 @@ import { NewProduct, Product } from '../../../store/interfaces';
 import { FOR_EDIT } from '../../../store/selectors';
 import { connect } from 'react-redux';
 import * as css from './manange-products.page.css';
-import { addProduct, updateProduct } from '../../../store/services';
+import { addProduct, formatSaveDate, updateProduct } from '../../../store/services';
 
 interface Props extends RouteComponentProps {
   product: Product;
@@ -54,19 +54,22 @@ const ManageProductsPage: React.FC<Props> = (props: Props) => {
 
       updateProduct(updatedProduct)
     } else {
+      const created = formatSaveDate(new Date());
+
       // Add a new product
       const newProduct: NewProduct = {
         name: newName,
         price: parseFloat(newPrice),
-        created: new Date()
+        created,
       }
 
       addProduct(newProduct);
     }
   }
 
-  console.log('+++ productId', productId);
   console.log('+++ id', id);
+  console.log('+++ product', product);
+
   return (
     <css.ManageProducts className='manage-products'>
       <h1>
@@ -89,7 +92,7 @@ const ManageProductsPage: React.FC<Props> = (props: Props) => {
 
 function mapStateToProps(state: AppState) {
   return {
-        product: FOR_EDIT(state),
+    product: FOR_EDIT(state),
   }
 }
 

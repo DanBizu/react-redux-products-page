@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
-export const ProductCard = styled.div`
-  width: 200px;
-  height: 350px;
+interface CardProps {
+  width: number;
+}
+
+export const ProductCard = styled.div<CardProps>`
+  width: ${props => props.width}px;
+  height: 250px;
   border-radius: 3px;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
   padding: 30px;

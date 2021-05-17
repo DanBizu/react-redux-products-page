@@ -29,7 +29,7 @@ export function reducer(state: AppState = initialState, action: Action<any>): Ap
 
     case actions.ADD_PRODUCT: {
       const currentProducts = [...state.products];
-      const newId = currentProducts.length;
+      const newId = currentProducts.length + 1;
 
       const newProduct: Product = {
         ...action.payload,

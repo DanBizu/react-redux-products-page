@@ -16,5 +16,5 @@ export interface Product extends NewProduct {
 export interface NewProduct {
   name: string;
   price: number;
-  created: Date;
+  created: string;
 }
