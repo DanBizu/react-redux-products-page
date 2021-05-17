@@ -1,7 +1,8 @@
 import React from 'react';
-import { Product } from '../../../interfaces/products';
+import { Product } from '../../../store/interfaces';
 import * as css from './product-card.css';
 import { useHistory } from 'react-router-dom';
+import { setForEdit } from '../../../store/services';
 
 interface Props {
   product: Product;
@@ -13,6 +14,7 @@ const ProductCard: React.FC<Props> = (props: Props) => {
   const history = useHistory();
 
   function goToEditProduct() {
+    setForEdit(product);
     history.push(`/manage/${id}`);
   }
 

@@ -1,7 +1,8 @@
-import { Product } from "../interfaces/products";
+import { Product } from "./interfaces";
 
 export interface AppState {
   products: Product[];
+  forEdit: Product;
 }
 
 const products: Product[] = [
@@ -21,4 +22,5 @@ const products: Product[] = [
 
 export const initialState: AppState = {
   products: products,
+  forEdit: {} as Product,
 };

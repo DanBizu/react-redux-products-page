@@ -1,13 +1,89 @@
-import React from 'react';
+import React, { FormEvent, useEffect } from 'react';
+import { useParams, withRouter, RouteComponentProps } from 'react-router-dom';
+import { AppState } from '../../../store/app.state';
+import { Product } from '../../../store/interfaces';
+import { FOR_EDIT } from '../../../store/selectors';
+import { connect } from 'react-redux';
+import * as css from './manange-products.page.css';
+import { updateProduct } from '../../../store/services';
 
-interface Props {}
+interface Props extends RouteComponentProps {
+  product: Product;
+}
+interface RouteParams {
+  id: string | undefined;
+}
 
-const ManageProductsPage: React.FC<Props> = (_props: Props) => {
+const ManageProductsPage: React.FC<Props> = (props: Props) => {
+  const { id } = useParams<RouteParams>();
+  const { product } = props;
+  const { id: productId, name, price } = product;
+  const [editMode, setEditMode] = React.useState(false);
+  const [newName, setNewName] = React.useState('');
+  const [newPrice, setNewPrice] = React.useState('');
+
+  useEffect(() => {
+    // Check if we edit an existing product or we're adding a new one.
+    if (productId.toString() === id) {
+      setEditMode(true);
+    }
+  }, [productId, id])
+
+  // If in edit mode, initialize the 'name' and 'price'
+  useEffect(() => {
+    if (editMode) {
+      setNewName(name);
+      setNewPrice(price.toString());
+    }
+  }, [editMode, name, price])
+
+  /**
+   * Update the product or add a new product
+   * @param {FormEvent} e submit event
+   */
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault()
+
+    if (editMode) {
+      const updatedProduct: Product = {
+        ...product,
+        name: newName,
+        price: parseFloat(newPrice),
+      }
+
+      // Update the value
+      updateProduct(updatedProduct)
+    } else {
+      // Add a new product
+    }
+  }
+
+  console.log('+++ productId', productId);
+  console.log('+++ id', id);
   return (
-    <h1>
-      Manage products page
-    </h1>
+    <css.ManageProducts className='manage-products'>
+      <h1>
+        Manage products page
+      </h1>
+
+      <css.Form onSubmit={handleSubmit}>
+        <label htmlFor="name">Name</label>
+        <input type="text" id="name" value={newName} onChange={(e) => setNewName(e.target.value)} />
+
+        <label htmlFor="price">Price</label>
+        <input type="number" id="price" value={newPrice} onChange={(e) => setNewPrice(e.target.value)} />
+
+        <input type="submit" value="Save" />
+      </css.Form>
+    </css.ManageProducts>
+
   );
 }
 
-export default ManageProductsPage;
+function mapStateToProps(state: AppState) {
+  return {
+        product: FOR_EDIT(state),
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(ManageProductsPage));

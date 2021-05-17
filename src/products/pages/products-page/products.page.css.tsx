@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-export const ProductsPage = styled.div`
-  padding: 60px 40px;
-`;
+export const ProductsPage = styled.div``;
 
 export const ProductsGrid = styled.div`
   display: grid;

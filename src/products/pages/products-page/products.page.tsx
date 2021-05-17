@@ -1,5 +1,5 @@
 import React from 'react';
-import { Product } from '../../../interfaces/products';
+import { Product } from '../../../store/interfaces';
 import { AppState } from '../../../store/app.state';
 import { PRODUCTS } from '../../../store/selectors';
 import * as css from './products.page.css';
