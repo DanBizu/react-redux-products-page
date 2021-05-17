@@ -10,6 +10,12 @@ const products: Product[] = [
     name: 'Ciuc',
     price: 3,
     created: new Date(2021, 4, 16, 18, 21)
+  },
+  {
+    id: 2,
+    name: 'Timisoreana',
+    price: 2.5,
+    created: new Date(2021, 4, 15, 13, 2)
   }
 ];
 

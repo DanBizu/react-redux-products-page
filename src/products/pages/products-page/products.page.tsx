@@ -4,6 +4,8 @@ import { AppState } from '../../../store/app.state';
 import { PRODUCTS } from '../../../store/selectors';
 import * as css from './products.page.css';
 import { connect } from 'react-redux';
+import ProductCard from '../../components/product-card/product-card';
+import AddCard from '../../components/product-card/add-card';
 
 interface Props {
   products: Product[];
@@ -11,13 +13,27 @@ interface Props {
 
 const ProductsPage: React.FC<Props> = (props: Props) => {
   const { products } = props;
-  console.log('+++ products', products);
+
   return (
     <css.ProductsPage className='products-page'>
       <h1>Products page</h1>
 
-      <css.ProductsGrid>
-      </css.ProductsGrid>
+      {
+        !!products.length ?
+        <>
+        <css.ProductsGrid>
+          {
+            products.map((product, key) =>
+              <ProductCard key={key} product={product} />
+            )
+          }
+          <AddCard />
+        </css.ProductsGrid>
+        </>
+        :
+        <p>No products ...</p>
+      }
+
     </css.ProductsPage>
   );
 }
