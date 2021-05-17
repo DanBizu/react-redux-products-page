@@ -1,11 +1,11 @@
 import React, { FormEvent, useEffect } from 'react';
 import { useParams, withRouter, RouteComponentProps } from 'react-router-dom';
 import { AppState } from '../../../store/app.state';
-import { Product } from '../../../store/interfaces';
+import { NewProduct, Product } from '../../../store/interfaces';
 import { FOR_EDIT } from '../../../store/selectors';
 import { connect } from 'react-redux';
 import * as css from './manange-products.page.css';
-import { updateProduct } from '../../../store/services';
+import { addProduct, updateProduct } from '../../../store/services';
 
 interface Props extends RouteComponentProps {
   product: Product;
@@ -24,7 +24,7 @@ const ManageProductsPage: React.FC<Props> = (props: Props) => {
 
   useEffect(() => {
     // Check if we edit an existing product or we're adding a new one.
-    if (productId.toString() === id) {
+    if (productId && id && productId.toString() === id) {
       setEditMode(true);
     }
   }, [productId, id])
@@ -45,16 +45,23 @@ const ManageProductsPage: React.FC<Props> = (props: Props) => {
     e.preventDefault()
 
     if (editMode) {
+      // Update the value
       const updatedProduct: Product = {
         ...product,
         name: newName,
         price: parseFloat(newPrice),
       }
 
-      // Update the value
       updateProduct(updatedProduct)
     } else {
       // Add a new product
+      const newProduct: NewProduct = {
+        name: newName,
+        price: parseFloat(newPrice),
+        created: new Date()
+      }
+
+      addProduct(newProduct);
     }
   }
 
@@ -73,7 +80,7 @@ const ManageProductsPage: React.FC<Props> = (props: Props) => {
         <label htmlFor="price">Price</label>
         <input type="number" id="price" value={newPrice} onChange={(e) => setNewPrice(e.target.value)} />
 
-        <input type="submit" value="Save" />
+        <input type="submit" value={editMode ? "Save" : "Add"} />
       </css.Form>
     </css.ManageProducts>
 

@@ -1,5 +1,5 @@
-import { Product } from "./interfaces";
-import * as act from './actions';
+import { NewProduct, Product } from "./interfaces";
+import * as act from "./actions";
 import { store } from "./store";
 
 export function setForEdit(product: Product) {
@@ -8,4 +8,8 @@ export function setForEdit(product: Product) {
 
 export function updateProduct(product: Product) {
   store.dispatch(act.updateProduct(product));
+}
+
+export function addProduct(newProduct: NewProduct) {
+  store.dispatch(act.addProduct(newProduct));
 }
