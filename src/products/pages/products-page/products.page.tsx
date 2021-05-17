@@ -22,12 +22,12 @@ const ProductsPage: React.FC<Props> = (props: Props) => {
         !!products.length ?
         <css.ProductsBackground>
           <css.ProductsGrid>
+            <AddCard width={css.CARD_WIDTH}/>
             {
               products.map((product, key) =>
                 <ProductCard key={key} product={product} width={css.CARD_WIDTH}/>
               )
             }
-            <AddCard width={css.CARD_WIDTH}/>
           </css.ProductsGrid>
         </css.ProductsBackground>
         :

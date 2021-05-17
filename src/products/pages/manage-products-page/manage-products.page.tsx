@@ -67,9 +67,6 @@ const ManageProductsPage: React.FC<Props> = (props: Props) => {
     }
   }
 
-  console.log('+++ id', id);
-  console.log('+++ product', product);
-
   return (
     <css.ManageProducts className='manage-products'>
       <h1>

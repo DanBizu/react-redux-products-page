@@ -19,8 +19,6 @@ const ProductCard: React.FC<Props> = (props: Props) => {
     history.push(`/manage/${id}`);
   }
 
-  console.log('+++ new Date(created)', new Date(created));
-
   return (
     <css.ProductCard width={width} className='product-card'>
       <css.CardContent>
